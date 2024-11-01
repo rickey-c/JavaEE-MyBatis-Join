@@ -1,0 +1,136 @@
+2024-11-01 19:30:00.821 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
+2024-11-01 19:30:00.894 [main] INFO  c.e.x.j.productdemoaop.ProductDemoAOPApplication - Starting ProductDemoAOPApplication using Java 17.0.10 with PID 32228 (D:\Git\JavaEE-MyBatis-Join\target\classes started by RicKey in D:\Git\JavaEE-MyBatis-Join)
+2024-11-01 19:30:00.896 [main] DEBUG c.e.x.j.productdemoaop.ProductDemoAOPApplication - Running with Spring Boot v3.3.4, Spring v6.1.13
+2024-11-01 19:30:00.897 [main] INFO  c.e.x.j.productdemoaop.ProductDemoAOPApplication - No active profile set, falling back to 1 default profile: "default"
+2024-11-01 19:30:03.488 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2024-11-01 19:30:03.492 [main] INFO  org.apache.catalina.core.AprLifecycleListener - Loaded Apache Tomcat Native library [2.0.7] using APR version [1.7.4].
+2024-11-01 19:30:03.498 [main] INFO  org.apache.catalina.core.AprLifecycleListener - OpenSSL successfully initialized [OpenSSL 3.0.13 30 Jan 2024]
+2024-11-01 19:30:03.508 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2024-11-01 19:30:03.512 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2024-11-01 19:30:03.512 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.30]
+2024-11-01 19:30:03.573 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2024-11-01 19:30:03.574 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 2615 ms
+2024-11-01 19:30:06.125 [main] INFO  o.s.b.actuate.endpoint.web.EndpointLinksResolver - Exposing 14 endpoints beneath base path '/actuator'
+2024-11-01 19:30:06.272 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2024-11-01 19:30:06.317 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2024-11-01 19:30:06.348 [main] INFO  c.e.x.j.productdemoaop.ProductDemoAOPApplication - Started ProductDemoAOPApplication in 6.008 seconds (process running for 7.006)
+2024-11-01 19:30:06.833 [RMI TCP Connection(1)-10.30.33.65] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-11-01 19:30:06.834 [RMI TCP Connection(1)-10.30.33.65] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2024-11-01 19:30:06.836 [RMI TCP Connection(1)-10.30.33.65] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 2 ms
+2024-11-01 19:30:06.886 [RMI TCP Connection(3)-10.30.33.65] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+2024-11-01 19:30:26.784 [SpringApplicationShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closing ...
+2024-11-01 19:30:26.789 [SpringApplicationShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed
+2024-11-01 19:30:30.124 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
+2024-11-01 19:30:30.166 [main] INFO  c.e.x.j.productdemoaop.ProductDemoAOPApplication - Starting ProductDemoAOPApplication using Java 17.0.10 with PID 9476 (D:\Git\JavaEE-MyBatis-Join\target\classes started by RicKey in D:\Git\JavaEE-MyBatis-Join)
+2024-11-01 19:30:30.167 [main] DEBUG c.e.x.j.productdemoaop.ProductDemoAOPApplication - Running with Spring Boot v3.3.4, Spring v6.1.13
+2024-11-01 19:30:30.168 [main] INFO  c.e.x.j.productdemoaop.ProductDemoAOPApplication - No active profile set, falling back to 1 default profile: "default"
+2024-11-01 19:30:32.322 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2024-11-01 19:30:32.328 [main] INFO  org.apache.catalina.core.AprLifecycleListener - Loaded Apache Tomcat Native library [2.0.7] using APR version [1.7.4].
+2024-11-01 19:30:32.336 [main] INFO  org.apache.catalina.core.AprLifecycleListener - OpenSSL successfully initialized [OpenSSL 3.0.13 30 Jan 2024]
+2024-11-01 19:30:32.352 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2024-11-01 19:30:32.357 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2024-11-01 19:30:32.358 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.30]
+2024-11-01 19:30:32.459 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2024-11-01 19:30:32.460 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 2244 ms
+2024-11-01 19:30:34.310 [main] INFO  o.s.b.actuate.endpoint.web.EndpointLinksResolver - Exposing 14 endpoints beneath base path '/actuator'
+2024-11-01 19:30:34.395 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2024-11-01 19:30:34.419 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2024-11-01 19:30:34.439 [main] INFO  c.e.x.j.productdemoaop.ProductDemoAOPApplication - Started ProductDemoAOPApplication in 4.704 seconds (process running for 5.579)
+2024-11-01 19:30:34.949 [RMI TCP Connection(2)-10.30.33.65] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-11-01 19:30:34.949 [RMI TCP Connection(2)-10.30.33.65] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2024-11-01 19:30:34.953 [RMI TCP Connection(2)-10.30.33.65] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 4 ms
+2024-11-01 19:30:34.990 [RMI TCP Connection(3)-10.30.33.65] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+2024-11-01 19:33:06.038 [http-nio-8080-exec-1] DEBUG c.e.x.j.p.controller.ProductController - getProductById: id = 2000 
+2024-11-01 19:33:06.183 [http-nio-8080-exec-1] DEBUG c.e.x.javaee.productdemoaop.service.ProductService - findProductById: id = 2000, all = true
+2024-11-01 19:34:32.253 [SpringApplicationShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closing ...
+2024-11-01 19:34:32.261 [SpringApplicationShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed
+2024-11-01 19:53:26.657 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
+2024-11-01 19:53:26.708 [main] INFO  c.e.x.j.productdemoaop.ProductDemoAOPApplication - Starting ProductDemoAOPApplication using Java 17.0.10 with PID 11676 (D:\Git\JavaEE-MyBatis-Join\target\classes started by RicKey in D:\Git\JavaEE-MyBatis-Join)
+2024-11-01 19:53:26.709 [main] DEBUG c.e.x.j.productdemoaop.ProductDemoAOPApplication - Running with Spring Boot v3.3.4, Spring v6.1.13
+2024-11-01 19:53:26.711 [main] INFO  c.e.x.j.productdemoaop.ProductDemoAOPApplication - No active profile set, falling back to 1 default profile: "default"
+2024-11-01 19:53:29.592 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2024-11-01 19:53:29.597 [main] INFO  org.apache.catalina.core.AprLifecycleListener - Loaded Apache Tomcat Native library [2.0.7] using APR version [1.7.4].
+2024-11-01 19:53:29.611 [main] INFO  org.apache.catalina.core.AprLifecycleListener - OpenSSL successfully initialized [OpenSSL 3.0.13 30 Jan 2024]
+2024-11-01 19:53:29.625 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2024-11-01 19:53:29.631 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2024-11-01 19:53:29.633 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.30]
+2024-11-01 19:53:29.736 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2024-11-01 19:53:29.737 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 2966 ms
+2024-11-01 19:53:32.083 [main] INFO  o.s.b.actuate.endpoint.web.EndpointLinksResolver - Exposing 14 endpoints beneath base path '/actuator'
+2024-11-01 19:53:32.184 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2024-11-01 19:53:32.212 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2024-11-01 19:53:32.222 [main] INFO  c.e.x.j.productdemoaop.ProductDemoAOPApplication - Started ProductDemoAOPApplication in 6.005 seconds (process running for 7.128)
+2024-11-01 19:53:32.500 [RMI TCP Connection(1)-10.30.33.65] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-11-01 19:53:32.500 [RMI TCP Connection(1)-10.30.33.65] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2024-11-01 19:53:32.500 [RMI TCP Connection(1)-10.30.33.65] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 0 ms
+2024-11-01 19:53:32.589 [RMI TCP Connection(2)-10.30.33.65] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+2024-11-01 19:53:36.979 [http-nio-8080-exec-1] DEBUG c.e.x.j.p.controller.ProductController - getProductById: id = 2000 
+2024-11-01 19:53:37.036 [http-nio-8080-exec-1] DEBUG c.e.x.javaee.productdemoaop.service.ProductService - findProductById: id = 2000, all = true
+2024-11-01 19:59:49.734 [SpringApplicationShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closing ...
+2024-11-01 19:59:49.741 [SpringApplicationShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed
+2024-11-01 20:57:56.516 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
+2024-11-01 20:57:56.582 [main] INFO  c.e.x.j.productdemoaop.ProductDemoAOPApplication - Starting ProductDemoAOPApplication using Java 17.0.10 with PID 20608 (D:\Git\JavaEE-MyBatis-Join\target\classes started by RicKey in D:\Git\JavaEE-MyBatis-Join)
+2024-11-01 20:57:56.582 [main] DEBUG c.e.x.j.productdemoaop.ProductDemoAOPApplication - Running with Spring Boot v3.3.4, Spring v6.1.13
+2024-11-01 20:57:56.584 [main] INFO  c.e.x.j.productdemoaop.ProductDemoAOPApplication - No active profile set, falling back to 1 default profile: "default"
+2024-11-01 20:57:59.251 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2024-11-01 20:57:59.251 [main] INFO  org.apache.catalina.core.AprLifecycleListener - Loaded Apache Tomcat Native library [2.0.7] using APR version [1.7.4].
+2024-11-01 20:57:59.259 [main] INFO  org.apache.catalina.core.AprLifecycleListener - OpenSSL successfully initialized [OpenSSL 3.0.13 30 Jan 2024]
+2024-11-01 20:57:59.267 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2024-11-01 20:57:59.277 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2024-11-01 20:57:59.277 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.30]
+2024-11-01 20:57:59.395 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2024-11-01 20:57:59.403 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 2699 ms
+2024-11-01 20:58:01.558 [main] INFO  o.s.b.actuate.endpoint.web.EndpointLinksResolver - Exposing 14 endpoints beneath base path '/actuator'
+2024-11-01 20:58:01.638 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2024-11-01 20:58:01.663 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2024-11-01 20:58:01.679 [main] INFO  c.e.x.j.productdemoaop.ProductDemoAOPApplication - Started ProductDemoAOPApplication in 5.721 seconds (process running for 6.942)
+2024-11-01 20:58:02.172 [RMI TCP Connection(2)-10.30.33.65] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-11-01 20:58:02.172 [RMI TCP Connection(2)-10.30.33.65] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2024-11-01 20:58:02.176 [RMI TCP Connection(2)-10.30.33.65] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 4 ms
+2024-11-01 20:58:02.227 [RMI TCP Connection(1)-10.30.33.65] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+2024-11-01 20:58:10.017 [http-nio-8080-exec-1] DEBUG c.e.x.j.p.controller.ProductController - getProductById: id = 2000 
+2024-11-01 20:58:10.083 [http-nio-8080-exec-1] DEBUG c.e.x.javaee.productdemoaop.service.ProductService - findProductById: id = 2000, all = true
+2024-11-01 20:58:29.362 [http-nio-8080-exec-8] DEBUG c.e.x.j.p.controller.ProductController - getProductById: id = 2000 
+2024-11-01 20:58:29.418 [http-nio-8080-exec-8] DEBUG c.e.x.javaee.productdemoaop.service.ProductService - findProductById: id = 2000, all = true
+2024-11-01 20:58:35.997 [http-nio-8080-exec-4] DEBUG c.e.x.j.p.controller.ProductController - getProductById: id = 2000 
+2024-11-01 20:58:36.054 [http-nio-8080-exec-4] DEBUG c.e.x.javaee.productdemoaop.service.ProductService - findProductById: id = 2000, all = true
+2024-11-01 20:58:45.329 [http-nio-8080-exec-6] DEBUG c.e.x.j.p.controller.ProductController - getProductById: id = 2000 
+2024-11-01 20:58:45.384 [http-nio-8080-exec-6] DEBUG c.e.x.javaee.productdemoaop.service.ProductService - findProductById: id = 2000, all = true
+2024-11-01 20:59:06.955 [SpringApplicationShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closing ...
+2024-11-01 20:59:06.971 [SpringApplicationShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed
+2024-11-01 20:59:49.285 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
+2024-11-01 20:59:49.356 [main] INFO  c.e.x.j.p.controller.AdminProductControllerTest - Starting AdminProductControllerTest using Java 17.0.10 with PID 36088 (started by RicKey in D:\Git\JavaEE-MyBatis-Join)
+2024-11-01 20:59:49.356 [main] DEBUG c.e.x.j.p.controller.AdminProductControllerTest - Running with Spring Boot v3.3.4, Spring v6.1.13
+2024-11-01 20:59:49.356 [main] INFO  c.e.x.j.p.controller.AdminProductControllerTest - No active profile set, falling back to 1 default profile: "default"
+2024-11-01 20:59:58.386 [main] INFO  o.s.b.test.mock.web.SpringBootMockServletContext - Initializing Spring TestDispatcherServlet ''
+2024-11-01 20:59:58.386 [main] INFO  o.s.test.web.servlet.TestDispatcherServlet - Initializing Servlet ''
+2024-11-01 20:59:58.421 [main] INFO  o.s.b.actuate.endpoint.web.EndpointLinksResolver - Exposing 14 endpoints beneath base path '/actuator'
+2024-11-01 20:59:58.488 [main] INFO  o.s.test.web.servlet.TestDispatcherServlet - Completed initialization in 90 ms
+2024-11-01 20:59:58.716 [main] INFO  c.e.x.j.p.controller.AdminProductControllerTest - Started AdminProductControllerTest in 10.082 seconds (process running for 11.991)
+2024-11-01 20:59:59.105 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+2024-11-01 21:00:03.727 [main] DEBUG c.e.x.j.p.controller.AdminProductController - getProductById: id = 1580 
+2024-11-01 21:00:03.727 [main] DEBUG c.e.x.javaee.productdemoaop.service.ProductService - findProductById: id = 1580, all = false
+2024-11-01 21:00:04.138 [main] INFO  cn.edu.xmu.javaee.core.aop.ControllerAspect - doAround: BusinessException， errno = RESOURCE_ID_NOTEXIST
+2024-11-01 21:00:04.412 [main] DEBUG c.e.x.j.p.controller.AdminProductController - getProductById: id = 1580 
+2024-11-01 21:00:04.412 [main] DEBUG c.e.x.javaee.productdemoaop.service.ProductService - findProductById: id = 1580, all = false
+2024-11-01 21:00:04.467 [main] INFO  cn.edu.xmu.javaee.core.aop.ControllerAspect - doAround: BusinessException， errno = RESOURCE_ID_NOTEXIST
+2024-11-01 21:00:04.736 [main] INFO  cn.edu.xmu.javaee.core.aop.ControllerAspect - doAround: BusinessException， errno = RESOURCE_ID_NOTEXIST
+2024-11-01 21:00:05.112 [main] DEBUG c.e.x.j.p.controller.AdminProductController - getProductById: id = 5462 
+2024-11-01 21:00:05.112 [main] DEBUG c.e.x.javaee.productdemoaop.service.ProductService - findProductById: id = 5462, all = false
+2024-11-01 21:00:05.803 [main] DEBUG c.e.x.j.p.controller.AdminProductController - getProductById: id = 1550 
+2024-11-01 21:00:05.803 [main] DEBUG c.e.x.javaee.productdemoaop.service.ProductService - findProductById: id = 1550, all = false
+2024-11-01 21:00:06.040 [main] DEBUG c.e.x.j.p.controller.AdminProductController - getProductById: id = 1550122 
+2024-11-01 21:00:06.040 [main] DEBUG c.e.x.javaee.productdemoaop.service.ProductService - findProductById: id = 1550122, all = false
+2024-11-01 21:00:06.087 [main] INFO  cn.edu.xmu.javaee.core.aop.ControllerAspect - doAround: BusinessException， errno = RESOURCE_ID_NOTEXIST
+2024-11-01 21:00:07.472 [main] DEBUG c.e.x.j.p.controller.ProductController - getProductById: id = 1550 
+2024-11-01 21:00:07.472 [main] DEBUG c.e.x.javaee.productdemoaop.service.ProductService - findProductById: id = 1550, all = true
+2024-11-01 21:00:07.821 [main] DEBUG c.e.x.j.p.controller.ProductController - getProductById: id = 1550122 
+2024-11-01 21:00:07.828 [main] DEBUG c.e.x.javaee.productdemoaop.service.ProductService - findProductById: id = 1550122, all = true
+2024-11-01 21:00:07.866 [main] INFO  cn.edu.xmu.javaee.core.aop.ControllerAspect - doAround: BusinessException， errno = RESOURCE_ID_NOTEXIST
+2024-11-01 21:00:08.023 [main] DEBUG c.e.x.j.p.controller.ProductController - getProductById: id = 1574 
+2024-11-01 21:00:08.039 [main] DEBUG c.e.x.javaee.productdemoaop.service.ProductService - findProductById_manual: id = 1574
+2024-11-01 21:00:08.369 [main] DEBUG c.e.x.j.p.controller.ProductController - getProductById: id = 1550122 
+2024-11-01 21:00:08.369 [main] DEBUG c.e.x.javaee.productdemoaop.service.ProductService - findProductById_manual: id = 1550122
+2024-11-01 21:00:08.419 [main] INFO  cn.edu.xmu.javaee.core.aop.ControllerAspect - doAround: BusinessException， errno = RESOURCE_ID_NOTEXIST
+2024-11-01 21:00:08.561 [SpringApplicationShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closing ...
+2024-11-01 21:00:08.561 [SpringApplicationShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed

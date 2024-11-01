@@ -16,7 +16,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static cn.edu.xmu.javaee.productdemo.util.Common.changeHttpStatus;
 
 /**
  * 商品控制器
@@ -43,7 +42,9 @@ public class ProductController {
         Product product = null;
         if (null != type && "manual" == type){
             product = productService.findProductById_manual(id);
-        } else {
+        } else if (null != type && "join" == type){
+            product = productService.findProductById_join(id);
+        }else {
             product = productService.retrieveProductByID(id, true);
         }
         ProductDto productDto = CloneFactory.copy(new ProductDto(), product);

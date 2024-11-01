@@ -3,14 +3,14 @@ package cn.edu.xmu.javaee.productdemoaop.dao;
 
 import cn.edu.xmu.javaee.core.exception.BusinessException;
 import cn.edu.xmu.javaee.core.model.ReturnNo;
-import cn.edu.xmu.javaee.productdemoaop.dao.OnSaleDao;
 import cn.edu.xmu.javaee.productdemoaop.dao.bo.OnSale;
 import cn.edu.xmu.javaee.productdemoaop.dao.bo.Product;
 import cn.edu.xmu.javaee.productdemoaop.dao.bo.User;
 import cn.edu.xmu.javaee.productdemoaop.mapper.generator.ProductPoMapper;
-import cn.edu.xmu.javaee.productdemoaop.mapper.generator.po.OnSalePo;
 import cn.edu.xmu.javaee.productdemoaop.mapper.generator.po.ProductPo;
 import cn.edu.xmu.javaee.productdemoaop.mapper.generator.po.ProductPoExample;
+import cn.edu.xmu.javaee.productdemoaop.mapper.join.ProductJoinMapper;
+import cn.edu.xmu.javaee.productdemoaop.mapper.join.po.ProductJoinPo;
 import cn.edu.xmu.javaee.productdemoaop.mapper.manual.ProductAllMapper;
 import cn.edu.xmu.javaee.productdemoaop.mapper.manual.po.ProductAllPo;
 import cn.edu.xmu.javaee.productdemoaop.util.CloneFactory;
@@ -38,6 +38,8 @@ public class ProductDao {
     private OnSaleDao onSaleDao;
 
     private ProductAllMapper productAllMapper;
+
+    private ProductJoinMapper productJoinMapper;
 
     @Autowired
     public ProductDao(ProductPoMapper productPoMapper, OnSaleDao onSaleDao, ProductAllMapper productAllMapper) {
@@ -180,7 +182,6 @@ public class ProductDao {
         ProductPoExample.Criteria criteria = example.createCriteria();
         criteria.andIdEqualTo(productId);
         List<ProductAllPo> productPoList = productAllMapper.getProductWithAll(example);
-
         if (productPoList.size() == 0){
             throw new BusinessException(ReturnNo.RESOURCE_ID_NOTEXIST, "产品id不存在");
         }
@@ -188,4 +189,51 @@ public class ProductDao {
         logger.debug("findProductByID_manual: product = {}", product);
         return product;
     }
+
+    /**
+     *
+     * @param  productId
+     * @return
+     */
+    public Product findProductByID_join(Long productId) {
+
+
+        List<ProductJoinPo> productJoinPoList = productJoinMapper.getProductsByProductIdWithJoin(productId);
+
+        if (productJoinPoList.isEmpty()) {
+            throw new BusinessException(ReturnNo.RESOURCE_ID_NOTEXIST, "产品id不存在");
+        }
+
+        // 获取并移除productId对应的JoinPo，这样剩下的
+        ProductJoinPo productJoinPo = productJoinPoList.get(0);
+
+        ProductAllPo productAllPo = ProductAllPo.builder()
+                .id(productJoinPo.getId())
+                .otherProduct(List.of(productJoinPo.getOtherProduct())) // 如果是单个ProductPo，需要调整
+                .onSaleList(List.of(productJoinPo.getOnSaleList())) // 如果是单个OnSalePo，需要调整
+                .skuSn(productJoinPo.getSkuSn())
+                .name(productJoinPo.getName())
+                .originalPrice(productJoinPo.getOriginalPrice())
+                .weight(productJoinPo.getWeight())
+                .barcode(productJoinPo.getBarcode())
+                .unit(productJoinPo.getUnit())
+                .originPlace(productJoinPo.getOriginPlace())
+                .creatorId(productJoinPo.getCreatorId())
+                .creatorName(productJoinPo.getCreatorName())
+                .modifierId(productJoinPo.getModifierId())
+                .modifierName(productJoinPo.getModifierName())
+                .gmtCreate(productJoinPo.getGmtCreate())
+                .gmtModified(productJoinPo.getGmtModified())
+                .commissionRatio(productJoinPo.getCommissionRatio())
+                .freeThreshold(productJoinPo.getFreeThreshold())
+                .status(productJoinPo.getStatus())
+                .build();
+
+        ArrayList<ProductAllPo> productAllPos = new ArrayList<>();
+        productAllPos.add(productAllPo);
+        Product product = CloneFactory.copy(new Product(), productAllPos.get(0));
+        logger.debug("findProductByID_join: product = {}", product);
+        return product;
+    }
+
 }

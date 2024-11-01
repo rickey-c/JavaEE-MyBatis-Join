@@ -94,4 +94,8 @@ public class ProductService {
         return productDao.findProductByName_manual(name);
     }
 
+    public Product findProductById_join(Long id) {
+        logger.debug("findProductById_join: id = {}", id);
+        return productDao.findProductByID_join(id);
+    }
 }
