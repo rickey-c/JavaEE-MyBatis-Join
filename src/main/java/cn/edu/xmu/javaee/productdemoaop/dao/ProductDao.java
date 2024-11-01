@@ -191,22 +191,20 @@ public class ProductDao {
     }
 
     /**
-     *
+     * 包装join查询
      * @param  productId
      * @return
      */
     public Product findProductByID_join(Long productId) {
-
-
+        // 获取ProductJoinPo列表
         List<ProductJoinPo> productJoinPoList = productJoinMapper.getProductsByProductIdWithJoin(productId);
-
         if (productJoinPoList.isEmpty()) {
             throw new BusinessException(ReturnNo.RESOURCE_ID_NOTEXIST, "产品id不存在");
         }
-
-        // 获取并移除productId对应的JoinPo，这样剩下的
+        // 拿到第一个对象，也就是我们要查询的对象
         ProductJoinPo productJoinPo = productJoinPoList.get(0);
 
+        // 包装返回结果
         ProductAllPo productAllPo = ProductAllPo.builder()
                 .id(productJoinPo.getId())
                 .otherProduct(List.of(productJoinPo.getOtherProduct())) // 如果是单个ProductPo，需要调整
@@ -229,6 +227,7 @@ public class ProductDao {
                 .status(productJoinPo.getStatus())
                 .build();
 
+        // 接着包装
         ArrayList<ProductAllPo> productAllPos = new ArrayList<>();
         productAllPos.add(productAllPo);
         Product product = CloneFactory.copy(new Product(), productAllPos.get(0));
