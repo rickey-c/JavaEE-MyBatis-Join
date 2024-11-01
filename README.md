@@ -1,2 +1,2 @@
-# MyBatis-Join-
+# MyBatis-Join
 2024年厦门大学JavaEE课程关于MyBatis使用Join读写效率测试源码仓库
