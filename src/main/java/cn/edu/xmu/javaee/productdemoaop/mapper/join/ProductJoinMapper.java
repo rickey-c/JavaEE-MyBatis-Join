@@ -1,70 +1,42 @@
 package cn.edu.xmu.javaee.productdemoaop.mapper.join;
 
+import cn.edu.xmu.javaee.productdemoaop.mapper.join.po.ProductAllPoSqlProvider;
 import cn.edu.xmu.javaee.productdemoaop.mapper.join.po.ProductJoinPo;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository
+@Mapper
 public interface ProductJoinMapper {
 
-    @Select("""
-        SELECT 
-            gp.id AS product_id,
-            gp.shop_id,
-            gp.goods_id,
-            gp.category_id,
-            gp.template_id,
-            gp.sku_sn,
-            gp.name,
-            gp.original_price,
-            gp.weight,
-            gp.barcode,
-            gp.unit,
-            gp.origin_place,
-            gp.creator_id AS product_creator_id,
-            gp.creator_name AS product_creator_name,
-            gp.modifier_id AS product_modifier_id,
-            gp.modifier_name AS product_modifier_name,
-            gp.gmt_create AS product_gmt_create,
-            gp.gmt_modified AS product_gmt_modified,
-            gp.status,
-            gp.commission_ratio,
-            gp.shop_logistic_id,
-            gp.free_threshold,
-            go.id AS onsale_id,
-            go.shop_id AS onsale_shop_id,
-            go.product_id AS onsale_product_id,
-            go.price,
-            go.begin_time,
-            go.end_time,
-            go.quantity,
-            go.type,
-            go.creator_id AS onsale_creator_id,
-            go.creator_name AS onsale_creator_name,
-            go.modifier_id AS onsale_modifier_id,
-            go.modifier_name AS onsale_modifier_name,
-            go.gmt_create AS onsale_gmt_create,
-            go.gmt_modified AS onsale_gmt_modified,
-            go.max_quantity,
-            go.invalid
-        FROM 
-            goods_product gp
-        JOIN 
-            goods_onsale go ON gp.id = go.product_id
-        WHERE 
-            gp.goods_id = (
-                SELECT goods_id 
-                FROM goods_product 
-                WHERE id = #{productId}
-            )
-            AND go.begin_time < NOW() 
-            AND go.end_time > NOW()
-        ORDER BY 
-            CASE WHEN gp.id = #{productId} THEN 0 ELSE 1 END, -- 输入的 ID 排到最上面
-            gp.id; -- 其他记录按 ID 排序
-    """)
-    List<ProductJoinPo> getProductsByProductIdWithJoin(@Param("productId") Long productId);
+    @SelectProvider(type = ProductAllPoSqlProvider.class, method = "getProductByNameWithJoin")
+    @Results({
+            @Result(column = "product_id", property = "id"),
+            @Result(column = "sku_sn", property = "skuSn"),
+            @Result(column = "name", property = "name"),
+            @Result(column = "original_price", property = "originalPrice"),
+            @Result(column = "weight", property = "weight"),
+            @Result(column = "barcode", property = "barcode"),
+            @Result(column = "unit", property = "unit"),
+            @Result(column = "origin_place", property = "originPlace"),
+            @Result(column = "creator_id", property = "creatorId"),
+            @Result(column = "creator_name", property = "creatorName"),
+            @Result(column = "modifier_id", property = "modifierId"),
+            @Result(column = "modifier_name", property = "modifierName"),
+            @Result(column = "gmt_create", property = "gmtCreate"),
+            @Result(column = "gmt_modified", property = "gmtModified"),
+            @Result(column = "on_sale_price", property = "onSaleList.price"),
+            @Result(column = "on_sale_quantity", property = "onSaleList.quantity"),
+            @Result(column = "on_sale_max_quantity", property = "onSaleList.maxQuantity"),
+            @Result(column = "other_product_id", property = "otherProduct.id"),
+            @Result(column = "other_product_name", property = "otherProduct.name"),
+            @Result(column = "other_product_original_price", property = "otherProduct.originalPrice"),
+            @Result(column = "other_product_weight", property = "otherProduct.weight"),
+            @Result(column = "other_product_barcode", property = "otherProduct.barcode"),
+            @Result(column = "other_product_unit", property = "otherProduct.unit"),
+            @Result(column = "other_product_origin_place", property = "otherProduct.originPlace")
+    })
+    List<ProductJoinPo> getProductByNameWithJoin(@Param("name") String name);
 }
+

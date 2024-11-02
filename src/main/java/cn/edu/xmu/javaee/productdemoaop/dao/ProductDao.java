@@ -42,16 +42,18 @@ public class ProductDao {
     private ProductJoinMapper productJoinMapper;
 
     @Autowired
-    public ProductDao(ProductPoMapper productPoMapper, OnSaleDao onSaleDao, ProductAllMapper productAllMapper) {
+    public ProductDao(ProductPoMapper productPoMapper, OnSaleDao onSaleDao, ProductAllMapper productAllMapper, ProductJoinMapper productJoinMapper) {
         this.productPoMapper = productPoMapper;
         this.onSaleDao = onSaleDao;
         this.productAllMapper = productAllMapper;
+        this.productJoinMapper = productJoinMapper;
     }
 
     /**
      * 用GoodsPo对象找Goods对象
+     *
      * @param name
-     * @return  Goods对象列表，带关联的Product返回
+     * @return Goods对象列表，带关联的Product返回
      */
     public List<Product> retrieveProductByName(String name, boolean all) throws BusinessException {
         List<Product> productList = new ArrayList<>();
@@ -59,7 +61,7 @@ public class ProductDao {
         ProductPoExample.Criteria criteria = example.createCriteria();
         criteria.andNameEqualTo(name);
         List<ProductPo> productPoList = productPoMapper.selectByExample(example);
-        for (ProductPo po : productPoList){
+        for (ProductPo po : productPoList) {
             Product product = null;
             if (all) {
                 product = this.retrieveFullProduct(po);
@@ -74,13 +76,14 @@ public class ProductDao {
 
     /**
      * 用GoodsPo对象找Goods对象
-     * @param  productId
-     * @return  Goods对象列表，带关联的Product返回
+     *
+     * @param productId
+     * @return Goods对象列表，带关联的Product返回
      */
     public Product retrieveProductByID(Long productId, boolean all) throws BusinessException {
         Product product = null;
         ProductPo productPo = productPoMapper.selectByPrimaryKey(productId);
-        if (null == productPo){
+        if (null == productPo) {
             throw new BusinessException(ReturnNo.RESOURCE_ID_NOTEXIST, "产品id不存在");
         }
         if (all) {
@@ -89,14 +92,14 @@ public class ProductDao {
             product = CloneFactory.copy(new Product(), productPo);
         }
 
-        logger.debug("retrieveProductByID: product = {}",  product);
+        logger.debug("retrieveProductByID: product = {}", product);
         return product;
     }
 
 
-    private Product retrieveFullProduct(ProductPo productPo) throws DataAccessException{
+    private Product retrieveFullProduct(ProductPo productPo) throws DataAccessException {
         assert productPo != null;
-        Product product =  CloneFactory.copy(new Product(), productPo);
+        Product product = CloneFactory.copy(new Product(), productPo);
         List<OnSale> latestOnSale = onSaleDao.getLatestOnSale(productPo.getId());
         product.setOnSaleList(latestOnSale);
 
@@ -106,7 +109,7 @@ public class ProductDao {
         return product;
     }
 
-    private List<Product> retrieveOtherProduct(ProductPo productPo) throws DataAccessException{
+    private List<Product> retrieveOtherProduct(ProductPo productPo) throws DataAccessException {
         assert productPo != null;
 
         ProductPoExample example = new ProductPoExample();
@@ -114,15 +117,16 @@ public class ProductDao {
         criteria.andGoodsIdEqualTo(productPo.getGoodsId());
         criteria.andIdNotEqualTo(productPo.getId());
         List<ProductPo> productPoList = productPoMapper.selectByExample(example);
-        return productPoList.stream().map(po->CloneFactory.copy(new Product(), po)).collect(Collectors.toList());
+        return productPoList.stream().map(po -> CloneFactory.copy(new Product(), po)).collect(Collectors.toList());
     }
 
     /**
      * 创建Goods对象
+     *
      * @param product 传入的Goods对象
      * @return 返回对象ReturnObj
      */
-    public Product createProduct(Product product, User user) throws BusinessException{
+    public Product createProduct(Product product, User user) throws BusinessException {
 
         Product retObj = null;
         product.setCreator(user);
@@ -135,29 +139,51 @@ public class ProductDao {
 
     /**
      * 修改商品信息
+     *
      * @param product 传入的product对象
      * @return void
      */
-    public void modiProduct(Product product, User user) throws BusinessException{
+    public void modiProduct(Product product, User user) throws BusinessException {
         product.setGmtModified(LocalDateTime.now());
         product.setModifier(user);
         ProductPo po = CloneFactory.copy(new ProductPo(), product);
         int ret = productPoMapper.updateByPrimaryKeySelective(po);
-        if (ret == 0 ){
+        if (ret == 0) {
             throw new BusinessException(ReturnNo.RESOURCE_ID_NOTEXIST);
         }
     }
 
     /**
      * 删除商品，连带规格
+     *
      * @param id 商品id
      * @return
      */
-    public void deleteProduct(Long id) throws BusinessException{
+    public void deleteProduct(Long id) throws BusinessException {
         int ret = productPoMapper.deleteByPrimaryKey(id);
         if (ret == 0) {
             throw new BusinessException(ReturnNo.RESOURCE_ID_NOTEXIST);
         }
+    }
+
+    /**
+     * 用GoodsPo对象找Goods对象
+     *
+     * @param productId
+     * @return Goods对象列表，带关联的Product返回
+     */
+    public Product findProductByID_manual(Long productId) throws BusinessException {
+        Product product = null;
+        ProductPoExample example = new ProductPoExample();
+        ProductPoExample.Criteria criteria = example.createCriteria();
+        criteria.andIdEqualTo(productId);
+        List<ProductAllPo> productPoList = productAllMapper.getProductWithAll(example);
+        if (productPoList.size() == 0) {
+            throw new BusinessException(ReturnNo.RESOURCE_ID_NOTEXIST, "产品id不存在");
+        }
+        product = CloneFactory.copy(new Product(), productPoList.get(0));
+        logger.debug("findProductByID_manual: product = {}", product);
+        return product;
     }
 
     public List<Product> findProductByName_manual(String name) throws BusinessException {
@@ -166,49 +192,37 @@ public class ProductDao {
         ProductPoExample.Criteria criteria = example.createCriteria();
         criteria.andNameEqualTo(name);
         List<ProductAllPo> productPoList = productAllMapper.getProductWithAll(example);
-        productList =  productPoList.stream().map(o->CloneFactory.copy(new Product(), o)).collect(Collectors.toList());
+        productList = productPoList.stream().map(o -> CloneFactory.copy(new Product(), o)).collect(Collectors.toList());
         logger.debug("findProductByName_manual: productList = {}", productList);
         return productList;
     }
 
     /**
-     * 用GoodsPo对象找Goods对象
-     * @param  productId
-     * @return  Goods对象列表，带关联的Product返回
-     */
-    public Product findProductByID_manual(Long productId) throws BusinessException {
-        Product product = null;
-        ProductPoExample example = new ProductPoExample();
-        ProductPoExample.Criteria criteria = example.createCriteria();
-        criteria.andIdEqualTo(productId);
-        List<ProductAllPo> productPoList = productAllMapper.getProductWithAll(example);
-        if (productPoList.size() == 0){
-            throw new BusinessException(ReturnNo.RESOURCE_ID_NOTEXIST, "产品id不存在");
-        }
-        product = CloneFactory.copy(new Product(), productPoList.get(0));
-        logger.debug("findProductByID_manual: product = {}", product);
-        return product;
-    }
-
-    /**
      * 包装join查询
-     * @param  productId
+     *
+     * @param name
      * @return
      */
-    public Product findProductByID_join(Long productId) {
+    public List<Product> findProductByName_join(String name) {
+        List<Product> productList;
         // 获取ProductJoinPo列表
-        List<ProductJoinPo> productJoinPoList = productJoinMapper.getProductsByProductIdWithJoin(productId);
+        List<ProductJoinPo> productJoinPoList = productJoinMapper.getProductByNameWithJoin(name);
+
+        logger.info(productJoinPoList.toString());
+
         if (productJoinPoList.isEmpty()) {
-            throw new BusinessException(ReturnNo.RESOURCE_ID_NOTEXIST, "产品id不存在");
+            throw new BusinessException(ReturnNo.RESOURCE_ID_NOTEXIST, "产品不存在");
         }
-        // 拿到第一个对象，也就是我们要查询的对象
+
         ProductJoinPo productJoinPo = productJoinPoList.get(0);
 
+        logger.error(productJoinPo.toString());
+        // 将ProductJoinPo列表转换为Product列表
         // 包装返回结果
         ProductAllPo productAllPo = ProductAllPo.builder()
                 .id(productJoinPo.getId())
-                .otherProduct(List.of(productJoinPo.getOtherProduct())) // 如果是单个ProductPo，需要调整
-                .onSaleList(List.of(productJoinPo.getOnSaleList())) // 如果是单个OnSalePo，需要调整
+                .otherProduct(new ArrayList<>()) // 如果是单个ProductPo，需要调整
+                .onSaleList(new ArrayList<>()) // 如果是单个OnSalePo，需要调整
                 .skuSn(productJoinPo.getSkuSn())
                 .name(productJoinPo.getName())
                 .originalPrice(productJoinPo.getOriginalPrice())
@@ -226,13 +240,14 @@ public class ProductDao {
                 .freeThreshold(productJoinPo.getFreeThreshold())
                 .status(productJoinPo.getStatus())
                 .build();
-
-        // 接着包装
-        ArrayList<ProductAllPo> productAllPos = new ArrayList<>();
-        productAllPos.add(productAllPo);
-        Product product = CloneFactory.copy(new Product(), productAllPos.get(0));
-        logger.debug("findProductByID_join: product = {}", product);
-        return product;
+        for (ProductJoinPo po : productJoinPoList) {
+            productAllPo.getOtherProduct().add(po.getOtherProduct());
+            productAllPo.getOnSaleList().add(po.getOnSaleList());
+        }
+        List<ProductAllPo> productPoList = new ArrayList<>();
+        productPoList.add(productAllPo);
+        productList = productPoList.stream().map(o -> CloneFactory.copy(new Product(), o)).collect(Collectors.toList());
+        logger.debug("findProductByName_join: productList = {}", productList);
+        return productList;
     }
-
 }

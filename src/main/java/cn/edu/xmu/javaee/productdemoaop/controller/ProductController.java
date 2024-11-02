@@ -1,18 +1,15 @@
 package cn.edu.xmu.javaee.productdemoaop.controller;
 
-import cn.edu.xmu.javaee.core.exception.BusinessException;
 import cn.edu.xmu.javaee.core.model.ReturnObject;
 import cn.edu.xmu.javaee.productdemoaop.controller.dto.ProductDto;
 import cn.edu.xmu.javaee.productdemoaop.dao.bo.Product;
 import cn.edu.xmu.javaee.productdemoaop.service.ProductService;
 import cn.edu.xmu.javaee.productdemoaop.util.CloneFactory;
-import jakarta.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -42,9 +39,7 @@ public class ProductController {
         Product product = null;
         if (null != type && "manual" == type){
             product = productService.findProductById_manual(id);
-        } else if (null != type && "join" == type){
-            product = productService.findProductById_join(id);
-        }else {
+        } else {
             product = productService.retrieveProductByID(id, true);
         }
         ProductDto productDto = CloneFactory.copy(new ProductDto(), product);
@@ -56,15 +51,20 @@ public class ProductController {
 
     @GetMapping("")
     public ReturnObject searchProductByName(@RequestParam String name, @RequestParam(required = false, defaultValue = "auto") String type) {
-        ReturnObject retObj = null;
-        List<Product> productList = null;
-        if (null != type && "manual" == type){
+        ReturnObject retObj;
+        List<Product> productList;
+        if ("manual".equals(type)) {
             productList = productService.findProductByName_manual(name);
+        } else if ("join".equals(type)) {
+            productList = productService.findProductByName_join(name);
         } else {
             productList = productService.retrieveProductByName(name, true);
         }
-        List<ProductDto> data = productList.stream().map(o->CloneFactory.copy(new ProductDto(),o)).collect(Collectors.toList());
+        List<ProductDto> data = productList.stream()
+                .map(o -> CloneFactory.copy(new ProductDto(), o))
+                .collect(Collectors.toList());
         retObj = new ReturnObject(data);
-        return  retObj;
+        return retObj;
     }
+
 }
