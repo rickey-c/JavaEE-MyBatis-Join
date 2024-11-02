@@ -2,7 +2,7 @@ package cn.edu.xmu.javaee.productdemoaop.mapper.join.po;
 
 import org.apache.ibatis.jdbc.SQL;
 
-public class ProductAllPoSqlProvider {
+public class ProductJoinPoSqlProvider {
     public String getProductByNameWithJoin(String name) {
         return new SQL() {{
             SELECT("p.id AS product_id");

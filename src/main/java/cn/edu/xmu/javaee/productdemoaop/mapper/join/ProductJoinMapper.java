@@ -1,16 +1,15 @@
 package cn.edu.xmu.javaee.productdemoaop.mapper.join;
 
-import cn.edu.xmu.javaee.productdemoaop.mapper.join.po.ProductAllPoSqlProvider;
+import cn.edu.xmu.javaee.productdemoaop.mapper.join.po.ProductJoinPoSqlProvider;
 import cn.edu.xmu.javaee.productdemoaop.mapper.join.po.ProductJoinPo;
 import org.apache.ibatis.annotations.*;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Mapper
 public interface ProductJoinMapper {
 
-    @SelectProvider(type = ProductAllPoSqlProvider.class, method = "getProductByNameWithJoin")
+    @SelectProvider(type = ProductJoinPoSqlProvider.class, method = "getProductByNameWithJoin")
     @Results({
             @Result(column = "product_id", property = "id"),
             @Result(column = "sku_sn", property = "skuSn"),
