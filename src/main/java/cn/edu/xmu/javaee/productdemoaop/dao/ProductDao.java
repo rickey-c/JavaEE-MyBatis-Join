@@ -11,9 +11,12 @@ import cn.edu.xmu.javaee.productdemoaop.mapper.generator.po.ProductPo;
 import cn.edu.xmu.javaee.productdemoaop.mapper.generator.po.ProductPoExample;
 import cn.edu.xmu.javaee.productdemoaop.mapper.join.ProductJoinMapper;
 import cn.edu.xmu.javaee.productdemoaop.mapper.join.po.ProductJoinPo;
+import cn.edu.xmu.javaee.productdemoaop.mapper.jpa.entity.ProductEntity;
+import cn.edu.xmu.javaee.productdemoaop.repository.ProductRepository;
 import cn.edu.xmu.javaee.productdemoaop.mapper.manual.ProductAllMapper;
 import cn.edu.xmu.javaee.productdemoaop.mapper.manual.po.ProductAllPo;
 import cn.edu.xmu.javaee.productdemoaop.util.CloneFactory;
+import jakarta.annotation.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +43,10 @@ public class ProductDao {
     private ProductAllMapper productAllMapper;
 
     private ProductJoinMapper productJoinMapper;
+
+    @Resource
+    private ProductRepository productRepository;
+
 
     @Autowired
     public ProductDao(ProductPoMapper productPoMapper, OnSaleDao onSaleDao, ProductAllMapper productAllMapper, ProductJoinMapper productJoinMapper) {
@@ -221,8 +228,8 @@ public class ProductDao {
         // 包装返回结果
         ProductAllPo productAllPo = ProductAllPo.builder()
                 .id(productJoinPo.getId())
-                .otherProduct(new ArrayList<>()) // 如果是单个ProductPo，需要调整
-                .onSaleList(new ArrayList<>()) // 如果是单个OnSalePo，需要调整
+                .otherProduct(new ArrayList<>())
+                .onSaleList(new ArrayList<>())
                 .skuSn(productJoinPo.getSkuSn())
                 .name(productJoinPo.getName())
                 .originalPrice(productJoinPo.getOriginalPrice())
@@ -249,5 +256,34 @@ public class ProductDao {
         productList = productPoList.stream().map(o -> CloneFactory.copy(new Product(), o)).collect(Collectors.toList());
         logger.debug("findProductByName_join: productList = {}", productList);
         return productList;
+    }
+
+    public List<Product> findProductByName_jpa(String name) {
+        List<ProductEntity> productFindByName = productRepository.findByName(name);
+        ArrayList<Product> productList = new ArrayList<>();
+        for (ProductEntity productEntity : productFindByName) {
+            Product product  = null;
+            product  = findFullProduct_jpa(productEntity);
+            productList.add(product);
+        }
+        logger.debug("findProductByName_jpa: productList = {}", productList);
+        return productList;
+    }
+
+    private Product findFullProduct_jpa(ProductEntity productEntity) {
+        Product product = CloneFactory.copy(new Product(),productEntity);
+        List<Product> otherProductJpa = findOtherProduct_jpa(productEntity);
+        product.setOtherProduct(otherProductJpa);
+        return product;
+    }
+    private List<Product> findOtherProduct_jpa(ProductEntity productEntity){
+
+        List<ProductEntity> otherProductEntities = productRepository.findOtherProducts(productEntity.getGoodsId(), productEntity.getId());
+        ArrayList<Product> otherProducts = new ArrayList<>();
+        for (ProductEntity otherProductEntity : otherProductEntities) {
+            otherProducts.add(CloneFactory.copy(new Product(),otherProductEntity));
+        }
+        return otherProducts;
+
     }
 }

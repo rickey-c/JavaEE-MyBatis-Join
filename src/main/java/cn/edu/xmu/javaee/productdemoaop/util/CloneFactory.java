@@ -9,6 +9,7 @@ import cn.edu.xmu.javaee.productdemoaop.dao.bo.Product;
 import cn.edu.xmu.javaee.productdemoaop.dao.bo.User;
 import cn.edu.xmu.javaee.productdemoaop.mapper.generator.po.OnSalePo;
 import cn.edu.xmu.javaee.productdemoaop.mapper.generator.po.ProductPo;
+import cn.edu.xmu.javaee.productdemoaop.mapper.jpa.entity.ProductEntity;
 import cn.edu.xmu.javaee.productdemoaop.mapper.manual.po.ProductAllPo;
 
 import java.util.ArrayList;
@@ -98,6 +99,11 @@ public class CloneFactory {
     }
 
     public static Product copy(Product target, ProductVo source){
+        target=Product.builder().name(source.getName()).barcode(source.getBarcode()).unit(source.getUnit()).originalPrice(source.getOriginalPrice()).originPlace(source.getOriginPlace()).weight(source.getWeight()).build();
+        return target;
+    }
+
+    public static Product copy(Product target, ProductEntity source){
         target=Product.builder().name(source.getName()).barcode(source.getBarcode()).unit(source.getUnit()).originalPrice(source.getOriginalPrice()).originPlace(source.getOriginPlace()).weight(source.getWeight()).build();
         return target;
     }

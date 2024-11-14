@@ -94,8 +94,19 @@ public class ProductService {
         return productDao.findProductByName_manual(name);
     }
 
+    /**
+     * 用商品名称搜索商品
+     *
+     * @param name 商品名称
+     * @return 商品对象
+     */
     public List<Product> findProductByName_join(String name) {
         logger.debug("findProductById_join: id = {}", name);
         return productDao.findProductByName_join(name);
+    }
+
+    public List<Product> findProductByName_jpa(String name) {
+        logger.debug("findProductById_jpa: name = {}", name);
+        return productDao.findProductByName_jpa(name);
     }
 }

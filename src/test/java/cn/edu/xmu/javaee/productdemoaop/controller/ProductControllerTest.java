@@ -4,6 +4,9 @@ package cn.edu.xmu.javaee.productdemoaop.controller;
 import cn.edu.xmu.javaee.core.model.ReturnNo;
 import cn.edu.xmu.javaee.productdemoaop.ProductDemoAOPApplication;
 
+import cn.edu.xmu.javaee.productdemoaop.mapper.jpa.entity.ProductEntity;
+import cn.edu.xmu.javaee.productdemoaop.repository.ProductRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -13,8 +16,11 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 import static org.hamcrest.CoreMatchers.*;
 
+@Slf4j
 @SpringBootTest(classes = ProductDemoAOPApplication.class)
 @AutoConfigureMockMvc
 @Transactional
@@ -22,6 +28,8 @@ public class ProductControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
+
+    private ProductRepository productRepository;
 
     private static final String PRODUCTID = "/products/{id}";
     private static final String PRODUCT = "/products";
@@ -129,5 +137,13 @@ public class ProductControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.errno", is(ReturnNo.OK.getErrNo())))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data.length()").value(0));
         //.andDo(MockMvcResultHandlers.print());
+    }
+
+    @Test
+    public void JpaTest(){
+        ProductEntity productEntity = new ProductEntity();
+        productEntity.setId(1554L);
+        Optional<ProductEntity> productList = productRepository.findById(productEntity.getId());
+        log.info("productList={}",productList);
     }
 }
