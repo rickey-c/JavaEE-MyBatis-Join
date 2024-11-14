@@ -276,6 +276,7 @@ public class ProductDao {
         product.setOtherProduct(otherProductJpa);
         return product;
     }
+
     private List<Product> findOtherProduct_jpa(ProductEntity productEntity){
 
         List<ProductEntity> otherProductEntities = productRepository.findOtherProducts(productEntity.getGoodsId(), productEntity.getId());
