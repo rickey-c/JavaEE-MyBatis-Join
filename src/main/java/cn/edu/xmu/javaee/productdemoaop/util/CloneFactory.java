@@ -104,7 +104,7 @@ public class CloneFactory {
     }
 
     public static Product copy(Product target, ProductEntity source){
-        target=Product.builder().name(source.getName()).barcode(source.getBarcode()).unit(source.getUnit()).originalPrice(source.getOriginalPrice()).originPlace(source.getOriginPlace()).weight(source.getWeight()).build();
+        target=Product.builder().id(source.getId()).name(source.getName()).barcode(source.getBarcode()).unit(source.getUnit()).originalPrice(source.getOriginalPrice()).originPlace(source.getOriginPlace()).weight(source.getWeight()).build();
         return target;
     }
 }
