@@ -103,11 +103,32 @@ public class CloneFactory {
         return target;
     }
 
-    public static Product copy(Product target, ProductEntity source){
-        target = Product.builder().id(source.getId()).name(source.getName()).barcode(source.getBarcode()).originalPrice(source.getOriginalPrice()).originPlace(source.getOriginPlace())
-                .skuSn(source.getSkuSn()).weight(source.getWeight()).unit(source.getUnit()).commissionRatio(source.getCommissionRatio()).freeThreshold(source.getFreeThreshold())
-                .creator(User.builder().id(source.getCreatorId()).name(source.getCreatorName()).build()).
-                modifier(User.builder().id(source.getModifierId()).name(source.getModifierName()).build()).gmtCreate(source.getGmtCreate()).gmtModified(source.getGmtModified()).build();
+    public static Product copy(Product target, ProductEntity source) {
+        // 创建 target 对象并填充字段
+        target = Product.builder()
+                .id(source.getId()) // 商品 ID
+                .skuSn(source.getSkuSn()) // SKU 编号
+                .name(source.getName()) // 商品名称
+                .originalPrice(source.getOriginalPrice()) // 原始价格
+                .weight(source.getWeight()) // 商品重量
+                .barcode(source.getBarcode()) // 商品条形码
+                .unit(source.getUnit()) // 商品单位
+                .originPlace(source.getOriginPlace()) // 产地
+                .commissionRatio(source.getCommissionRatio()) // 佣金比率
+                .freeThreshold(source.getFreeThreshold()) // 免邮门槛
+                .status(source.getStatus().byteValue()) // 商品状态
+                .creator(User.builder()
+                        .id(source.getCreatorId()) // 创建者ID
+                        .name(source.getCreatorName()) // 创建者姓名
+                        .build())
+                .modifier(User.builder()
+                        .id(source.getModifierId()) // 修改者ID
+                        .name(source.getModifierName()) // 修改者姓名
+                        .build())
+                .gmtCreate(source.getGmtCreate()) // 创建时间
+                .gmtModified(source.getGmtModified()) // 最后修改时间
+                .build();
         return target;
     }
+
 }

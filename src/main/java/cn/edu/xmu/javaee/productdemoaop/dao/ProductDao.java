@@ -260,15 +260,11 @@ public class ProductDao {
 
     public List<Product> findProductByName_jpa(String name) {
         List<ProductEntity> productFindByName = productRepository.findByName(name);
-        ArrayList<Product> productList = new ArrayList<>();
-        for (ProductEntity productEntity : productFindByName) {
-            Product product  = null;
-            product  = findFullProduct_jpa(productEntity);
-            productList.add(product);
-        }
-        logger.debug("findProductByName_jpa: productList = {}", productList);
-        return productList;
+        return productFindByName.stream()
+                .map(this::findFullProduct_jpa)
+                .collect(Collectors.toList());
     }
+
 
     private Product findFullProduct_jpa(ProductEntity productEntity) {
         Product product = CloneFactory.copy(new Product(),productEntity);
