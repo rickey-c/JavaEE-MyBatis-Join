@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +21,7 @@ import java.util.stream.Collectors;
  **/
 @Data
 @NoArgsConstructor
-public class Product {
+public class Product implements Serializable {
 
     private static final Logger logger = LoggerFactory.getLogger(Product.class);
 
@@ -80,4 +81,6 @@ public class Product {
         this.gmtCreate = gmtCreate;
         this.gmtModified = gmtModified;
     }
+
+    private static final long serialVersionUID = 1L;
 }

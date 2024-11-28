@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 
@@ -33,14 +34,20 @@ public class ProductController {
     }
 
     @GetMapping("{id}")
-    public ReturnObject getProductById(@PathVariable("id") Long id, @RequestParam(required = false, defaultValue = "auto") String type) {
+    public ReturnObject getProductById(@PathVariable("id") Long id, @RequestParam(required = false, defaultValue = "auto") String type,
+                                       @RequestParam(required = false, defaultValue = "false") String useRedis) {
         logger.debug("getProductById: id = {} " ,id);
         ReturnObject retObj = null;
         Product product = null;
         if (null != type && "manual" == type){
             product = productService.findProductById_manual(id);
         } else {
-            product = productService.retrieveProductByID(id, true);
+            logger.info("useRedis = {}",useRedis);
+            if (useRedis.equals("true")){
+                product = productService.retrieveProductByID(id, true,true);
+            }else {
+                product = productService.retrieveProductByID(id, true,false);
+            }
         }
         ProductDto productDto = CloneFactory.copy(new ProductDto(), product);
         retObj = new ReturnObject(productDto);

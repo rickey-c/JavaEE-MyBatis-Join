@@ -281,6 +281,5 @@ public class ProductDao {
             otherProducts.add(CloneFactory.copy(new Product(),otherProductEntity));
         }
         return otherProducts;
-
     }
 }
